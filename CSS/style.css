@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap'); /* Importa a fonte Quicksand do Google Fonts */
+
+* {
+    box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total do elemento */
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary-color: #8ab4f8; /* Cor primária (azul claro) */
+    --secondary-color: #e8eaed; /* Cor secundária (cinza claro) */
+    --tertiary-color: #9aa0a6; /* Cor terciária (cinza médio) */
+    --bg-color: #202124; /* Cor de fundo (cinza escuro) */
+    --dark-bg-color: #1a1a1d;
+}
+
+body {
+    margin: 0; /* Remove a margem padrão do body */
+    background: var(--bg-color); /* Define a cor de fundo usando uma variável */
+    color: var(--secondary-color); /* Define a cor do texto padrão usando uma variável */
+    font-family: "Quicksand", sans-serif; /* Define a família da fonte */
+}
+/* Custom Scrollbar */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: var(--tertiary-color);
+    border-radius: 4px;
+}
+
+header {
+    display: flex; /* Habilita o layout flexbox */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    justify-content: space-around; /* Distribui os itens com espaço ao redor */
+    position: sticky; /* Mantém o cabeçalho fixo no topo ao rolar a página */
+    top: 0; /* Posição do topo quando sticky */
+    background: var(--bg-color); /* Cor de fundo do cabeçalho */
+    z-index: 10; /* Define a ordem de empilhamento para ficar sobre outros elementos */
+    border-bottom: 1px solid #3c4043; /* Adiciona uma borda inferior */
+    gap: 1rem; /* Espaçamento entre os elementos flex */
+    padding: 1rem;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+ 
+header h1 {
+    font-size: 1.5rem; /* Tamanho da fonte */
+    margin: 0; /* Remove a margem padrão */
+    font-weight: 500; /* Peso da fonte (médio) */
+    white-space: nowrap; /* Impede a quebra de linha do texto */
+}
+
+/* --- Filters --- */
+.filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background-color: var(--bg-color);
+    position: sticky;
+    top: 82px; /* Altura do header */
+    z-index: 9;
+}
+
+#searchInput, #sortOptions {
+    padding: 0.375rem 0.75rem; /* Espaçamento interno */
+    border-radius: 1rem; /* Arredonda as bordas */
+    border: 1px solid var(--tertiary-color); /* Define a borda */
+    background: var(--bg-color); /* Cor de fundo */
+    font-family: inherit; /* Herda a família da fonte do elemento pai */
+    font-size: 1rem;
+    transition: all 0.2s ease; /* Adiciona uma transição suave para todas as propriedades */
+    color: var(--secondary-color); /* Cor do texto digitado */
+}
+
+#searchInput {
+    width: 30rem;
+}
+
+#searchInput::placeholder {
+    font-size: 1rem; /* Tamanho da fonte do placeholder */
+    font-weight: 300; /* Peso da fonte do placeholder */
+    color: var(--tertiary-color); /* Cor do texto do placeholder */
+}
+
+#searchInput:focus, #sortOptions:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.1rem var(--tertiary-color); /* Adiciona uma sombra de caixa para indicar foco */
+}
+
+/* --- Product Catalog --- */
+.catalog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background-color: var(--dark-bg-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    cursor: pointer; /* Muda o cursor para uma mão */
+}
+
+.product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0 0 0.5rem 0;
+}
+
+.product-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    flex-grow: 1;
+    margin: 0 0 1rem 0;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: auto; /* Empurra o preço para o final do card */
+}
+
+/* --- Lightbox --- */
+.lightbox {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)}
+    to {transform: scale(1)}
+}
+
+#lightbox-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--dark-bg-color);
+    color: var(--tertiary-color);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-top: 1px solid #3c4043;
+    margin-top: 2rem;
+}
+
+.social-groups {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 1rem 0 2rem 0;
+    flex-wrap: wrap;
+}
+
+.social-group-title {
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--tertiary-color);
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover svg {
+    fill: var(--primary-color);
+    transform: scale(1.1);
+}
+
+/* --- Product Card WhatsApp Button --- */
+.whatsapp-button {
+    display: flex; /* Habilita flexbox para alinhar ícone e texto */
+    align-items: center; /* Alinha verticalmente ao centro */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 0.5rem; /* Espaçamento entre o ícone e o texto */
+    /* Gradiente de roxo e azul (o mesmo usado nos ícones do rodapé para consistência) */
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    color: var(--secondary-color); /* Cor do texto (cinza claro) para alto contraste */
+    padding: 0.5rem 1rem; /* Espaçamento interno do botão */
+    border-radius: 25px; /* Bordas arredondadas para um visual de botão */
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+    font-weight: 500; /* Peso da fonte */
+    margin-top: 1rem; /* Margem superior para separar do preço */
+    transition: all 0.3s ease; /* Transição suave para efeitos de hover */
+    width: fit-content; /* Ajusta a largura do botão ao seu conteúdo */
+    align-self: center; /* Centraliza o botão dentro do card de produto (que é um flex-column) */
+}
+
+.whatsapp-button:hover {
+    background: linear-gradient(-45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d); /* Inverte o gradiente no hover */
+    transform: translateY(-2px); /* Pequeno efeito de elevação */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para destacar */
+}
+
+.whatsapp-button svg {
+    width: 20px; /* Tamanho do ícone SVG */
+    height: 20px;
+    fill: var(--secondary-color); /* Cor do ícone (cinza claro) para contraste */
+}
+
+.whatsapp-button span {
+    color: var(--secondary-color); /* Garante que o texto também seja cinza claro */
+}
+
+/*.social-icon.whatsapp-icon {
+    background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    border-radius: 6px;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon.whatsapp-icon svg {
+    fill: var(--secondary-color); /* Garante que o ícone fique branco/claro 
+}
+
+.social-icon.whatsapp-icon:hover {
+    background: linear-gradient(-45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}*/
+
+footer p {
+    margin: 0.5rem 0;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    header { /* Estilos para telas com largura máxima de 768px */
+        flex-direction: column; /* Organiza os itens do cabeçalho em coluna */
+        position: static;
+    }
+
+    header h1 { /* Estilos para o h1 no cabeçalho em telas menores */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .filters-container {
+        position: static;
+    }
+
+    #searchInput {
+        width: 90%;
+    }
+
+    .catalog-container {
+        padding: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 { /* Estilos para o h1 em telas com largura máxima de 480px */
+        font-size: 1rem; /* Reduz ainda mais o tamanho da fonte */
+    }
+
+    .filters-container {
+        flex-direction: column;
+    }
+
+    #searchInput, #sortOptions {
+        width: 90%;
+    }
+
+    .catalog-container {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    }
+
+    .social-groups {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .lightbox-content {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,275 @@
+/* --- FONTES E PALETA DE CORES DA MARCA --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+:root {
+    --cor-fundo: #fdfaf6; /* Um branco-quente e suave */
+    --cor-texto: #4a4a4a; /* Cinza escuro para texto, mais suave que preto */
+    --cor-header-footer: #2c2c2c; /* Um carvão profundo e elegante */
+    --cor-dourado-principal: #c5a47e; /* Dourado principal da logo */
+    --cor-dourado-hover: #b8956f; /* Tom mais escuro para hover */
+    --cor-rosa-detalhe: #e0b4b4; /* Rosa suave da logo para detalhes */
+    --cor-branco: #ffffff;
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Estilos gerais do corpo da página */
+body {
+    font-family: 'Lato', sans-serif; /* Fonte mais legível para o corpo */
+    margin: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: var(--cor-header-footer);
+    color: var(--cor-branco);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 3px solid var(--cor-dourado-principal); /* Detalhe dourado */
+}
+
+/* Estilo da logo no cabeçalho */
+.logo {
+    height: 50px; /* Ajuste a altura conforme necessário */
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif; /* Fonte mais elegante para títulos */
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+
+/* Container dos filtros */
+.filters-container {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--cor-branco);
+    margin-bottom: 1rem;
+}
+
+/* Estilo do campo de busca e do seletor de ordenação */
+#searchInput, #sortOptions {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Lato', sans-serif;
+}
+
+#searchInput:focus, #sortOptions:focus {
+    outline: 1px solid var(--cor-dourado-principal);
+    border-color: var(--cor-dourado-principal);
+}
+
+/* Container principal do catálogo */
+.catalog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Estilo dos cards de produto */
+.product-card {
+    background-color: var(--cor-branco);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Animação de hover nos cards */
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Estilo da imagem do produto */
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Estilo do nome do produto */
+.product-card h3 {
+    margin: 1rem 0.5rem 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    flex-grow: 1; /* Faz o título ocupar o espaço para alinhar os botões */
+}
+
+/* Estilo do preço do produto */
+.product-card .price {
+    color: var(--cor-texto);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Estilo do botão do WhatsApp */
+.whatsapp-button {
+    background-color: var(--cor-dourado-principal);
+    color: var(--cor-branco);
+    padding: 0.7rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    border-radius: 0 0 7px 7px; /* A borda superior já é arredondada pelo card */
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-button:hover {
+    background-color: var(--cor-dourado-hover);
+}
+
+/* Estilos do Lightbox */
+.lightbox {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo do Lightbox (imagem) */
+.lightbox-content {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+/* Legenda do Lightbox */
+#lightbox-caption {
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Botão de fechar do Lightbox */
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: var(--cor-header-footer);
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 3px solid var(--cor-dourado-principal);
+}
+
+/* --- ESTILOS DOS ÍCONES SOCIAIS NO RODAPÉ --- */
+
+/* Container para os grupos de redes sociais */
+.social-groups {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+/* Título de cada grupo social */
+.social-group-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Container dos links de ícones */
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Estilo base para cada ícone */
+.social-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    fill: var(--cor-branco); /* Cor do ícone */
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Cores específicas para cada rede */
+.facebook-icon { background-color: #1877F2; }
+.whatsapp-icon { background-color: #25D366; } /* Mantém a cor original para reconhecimento */
+
+/* Estilo para o gradiente do Instagram */
+.instagram-icon svg {
+    fill: url(#ig-grad);
+}
+
+/* Estilo da logo no rodapé */
+.logo-footer {
+    height: 60px; /* Ajuste a altura conforme necessário */
+    margin-top: 1rem;
+}
+
+/* --- ESTILOS RESPONSIVOS --- */
+
+/* Para tablets e telas um pouco menores (até 768px) */
+@media (max-width: 768px) {
+    .product-card {
+        /* Ajusta a largura para que caibam 2 cards por linha */
+        width: calc(50% - 2rem);
+    }
+
+    .filters-container {
+        /* Organiza os filtros em coluna para melhor visualização */
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    #searchInput, #sortOptions {
+        /* Faz os filtros ocuparem mais espaço na tela */
+        width: 80%;
+    }
+}
+
+/* Para celulares e telas bem pequenas (até 480px) */
+@media (max-width: 480px) {
+    .product-card {
+        /* Ajusta a largura para que caiba apenas 1 card por linha */
+        width: 90%;
+    }
+
+    header h1 {
+        /* Diminui a fonte do título em telas pequenas */
+        font-size: 1.2rem;
+    }
+}
