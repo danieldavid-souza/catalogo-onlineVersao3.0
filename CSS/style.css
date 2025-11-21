@@ -105,6 +105,11 @@ header h1 {
 }
 
 .product-card {
+  padding: 1rem;
+  box-sizing: border-box; /* Garante que o padding não aumente o tamanho total do card */
+}
+
+.product-card {
     background-color: var(--dark-bg-color);
     border-radius: 8px;
     overflow: hidden;
